@@ -1,0 +1,11 @@
+groups:
+  - name: alerta_cpu
+    rules:
+      - alert: UsoCPU
+        expr: rate(node_cpu_seconds_total{mode!="idle"}[1m]) > 0.20
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Uso elevado de CPU en {{ $labels.instance }}"
+          description: "A CPU superou o valor durante os últimos 30 segundos."
