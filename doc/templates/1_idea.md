@@ -1,72 +1,57 @@
-# Sistema de monitorización
-### Tipo de proxecto
+# Monitoring System
+### Project Type
 
-Este proxecto ten como fin documentar como poñer en marcha un sistema de monitorización empregando as ferramentas de software libre Prometheus e Grafana engadindo ao final do mesmo un factor máis práctico no que se poida observar o funcionamento real da solución.
+This project aims to document how to deploy a monitoring system using the open-source tools Prometheus and Grafana, incorporating a practical component at the end to demonstrate the real-world operation of the proposed solution.
 
-### Bases
+### Foundations
 
-A meta desta iniciativa consiste en crear un sistema de monitorización baseado en Prometheus e Grafana, coa motivación de poñer en práctica os coñecementos adquiridos ao longo deste curso, e que poden representar un potencial atractivo de cara a aquelas empresas que non conten cos medios necesarios para monitorizar e analizar os seus sistemas informáticos en tempo real, dando pé a numerosas vulnerabilidades que poden xerar perdas económicas e de produtividade se non son detectadas a tempo.
+The goal of this initiative is to create a monitoring system based on Prometheus and Grafana, with the purpose of applying the knowledge acquired throughout this course. This solution may represent an attractive option for companies that lack the necessary resources to monitor and analyze their IT systems in real time, which can otherwise lead to vulnerabilities, financial losses, and reduced productivity if issues are not detected early.
 
-### Problemática
+### Problem Statement
 
-Ante un escenario no que moitas empresas se atopan en pleno proceso de dixitalización, preténdese ofrecer unha solución flexible, intuitiva e personalizada que as anime a tomar conciencia da importancia de monitorizar os seus sistemas e das múltiples incidencias que poderían ser evitadas cun mínimo control e xestión proactiva.
+In a context where many companies are undergoing digital transformation, this project seeks to provide a flexible, intuitive, and customizable solution that encourages organizations to recognize the importance of monitoring their systems and preventing incidents that could otherwise be avoided with minimal proactive control and management.
 
-### Contexto
+### Context
 
-Con esta proposta quérese chegar a aquelas pequenas e medianas empresas que, malia avanzar na súa transformación dixital e investir en software e hardware (como servidores, equipos informáticos ou máquinas virtuais), aínda non dispoñen ou descoñecen os medios necesarios para levar un control axeitado sobre a súa infraestrutura. Isto provoca que, ante moitas das incidencias que poidan sufrir, descoñezan mesmo a súa orixe ou non conten coa preparación suficiente para responder de maneira efectiva.
+This proposal targets small and medium-sized enterprises that, despite progressing in their digital transformation and investing in software and hardware (such as servers, workstations, or virtual machines), still lack or are unaware of the tools required to properly monitor their infrastructure. As a result, when incidents occur, they may not understand their origin or be adequately prepared to respond effectively.
 
-### Necesidades
+### Needs
 
-Preténdese que as empresas comecen a controlar os seus sistemas e poidan detectar vulnerabilidades ou anomalías antes de que afecten directamente a distintos aspectos da súa operativa, achegando así maior seguridade e mellor tempo de resposta no contorno no que operan.  
+The objective is for companies to gain visibility into their systems and detect vulnerabilities or anomalies before they directly impact business operations, thereby improving security and response times within their working environment.
 
-Isto abre unha oportunidade no mercado para unha gran variedade de negocios e sectores que queiran aproveitar os beneficios que ofrece unha solución deste tipo.  
+This creates a market opportunity for a wide range of businesses and sectors that wish to benefit from the advantages of such a monitoring solution.
 
-Para a comercialización do sistema, proponse a entrega dunha guía técnica detallada, na que se inclúa todo o necesario para configurar as ferramentas empregadas, así como exemplos prácticos de alertas que cada empresa poderá adaptar en función das súas necesidades ou dos aspectos que queira priorizar.  
+For commercialization purposes, the project proposes delivering a detailed technical guide including all necessary steps to configure the tools used, along with practical examples of alerts that each company can adapt according to its priorities and operational requirements.
 
-Adicionalmente, valórase a posibilidade de ofrecer soporte inicial ou servizos de adaptación personalizados como complemento á documentación base. 
+Additionally, the possibility of offering initial support or customized adaptation services is considered as a complementary service to the base documentation.
 
-### Outras ferramentas
+### Alternative Tools
 
-Na actualidade existen moitas aplicacións que buscan dar resposta á necesidade de monitorización e control de sistemas. As máis destacadas son Zabbix, Nagios, Pandora FMS, Centreon e mesmo Datadog, que ofrece o seu servizo na nube.  
+Currently, there are many applications designed to address system monitoring needs. The most prominent include Zabbix, Nagios, Pandora FMS, Centreon, and Datadog (which offers a cloud-based service).
 
-Estas ferramentas, ao igual que Prometheus e Grafana, permiten monitorizar e analizar métricas en tempo real, pero tamén presentan certas limitacións que motivaron a escolla dunha solución máis clara e sinxela como a proposta actual.  
+These tools, like Prometheus and Grafana, allow real-time monitoring and analysis of metrics. However, they also present certain limitations that motivated the selection of a clearer and more streamlined solution as proposed in this project.
 
-De forma xeral, entre as aplicacións mencionadas atopamos algunhas moi potentes, si, pero tamén moitas que:
+In general terms, while some of these tools are highly powerful, many of them:
 
-- Ofrecen os seus servizos baixo modelos de pago, como é o caso de Datadog.
+- Operate under paid service models, such as Datadog.
+- Require more robust infrastructure.
+- Present a steeper learning curve.
+- Offer less scalability flexibility.
+- Rely on legacy or more complex architectures.
 
-- Requiren dunha infraestrutura máis potente.
+The proposed solution aims to provide companies—particularly those taking their first steps in digital transformation—with a system that is intuitive, practical, and accessible, without compromising quality or adaptability.
 
-- Presentan unha curva de aprendizaxe máis pronunciada.
+### Objective
 
-- Non teñen a mesma escalabilidade.
+In line with the previous section, and with the goal of facilitating the deployment of a monitoring system for companies that currently lack one, this project seeks to design and document as precisely as possible a solution capable of visualizing real-time data and detecting anomalies before they evolve into critical issues.
 
-- Contan cunha arquitectura antiga.
+To ensure effective response times, the system incorporates automated notifications through Alertmanager, allowing customized alerts to be created and delivered simultaneously through multiple channels such as email, Telegram, or SMS, thereby enabling immediate reaction to potential incidents.
 
-Pola súa parte, a proposta busca ofrecer ás empresas que, como se indicou anteriormente, están a dar os seus primeiros pasos na dixitalización, un sistema o máis intuitivo, práctico e accesible posible, sen renunciar á calidade nin á capacidade de adaptación.  
+### Technological Resources
 
-### Obxectivo
-
-Continuando co mencionado no punto anterior, e co obxectivo de favorecer a posta en marcha dun sistema de monitorización para aquelas empresas que carecen del, búscase deseñar e documentar da forma máis precisa posible unha solución que permita visualizar datos en tempo real e detectar anomalías antes de que se convertan en problemas potenciais.
-
-Para garantir un tempo de resposta eficaz, preténdese implementar un sistema de notificacións automáticas mediante Alertmanager, que permite crear alertas personalizadas e envialas por diferentes canles de forma simultánea, como correo electrónico, Telegram ou SMS, ofrecendo así ás empresas capacidade de reacción inmediata ante posibles incidencias.
-
-
-
-### Medios tecnolóxicos
-
-- Prometheus - Recolección e almacenamento de métricas
-
-- Grafana - Visualización de datos e creación de dashboards
-
-- Node Exporter - Exportación de métricas do sistema
-
-- Alertmanager - Xestión e envío de alertas
-
-- Ubuntu Server - Sistema operativo base
-
-- VirtualBox - Contorno de traballo
-
-
-
-
+- Prometheus – Metrics collection and storage
+- Grafana – Data visualization and dashboard creation
+- Node Exporter – System metrics export
+- Alertmanager – Alert management and notification delivery
+- Ubuntu Server – Base operating system
+- VirtualBox – Virtualization environment
