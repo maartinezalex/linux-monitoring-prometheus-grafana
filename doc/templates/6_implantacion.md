@@ -279,8 +279,6 @@ To send alert emails, it is recommended to create an app password instead of usi
 
 <img src="../img/alerta1.png" />
 
-<img src="../img/alerta2.png" />
-
 **b) Configure the Alertmanager file**
 
 In `alertmanager.yml`, add Gmail’s SMTP server, the account email, and the generated app password. Also add `send_resolved: true` so another email is sent when the alert is resolved, which greatly helps tracking.
