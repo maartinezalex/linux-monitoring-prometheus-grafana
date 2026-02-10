@@ -1,118 +1,129 @@
-# Estudo de necesidades e modelo de negocio
+# Needs Analysis and Business Model
 
-## Xustificación das necesidades detectadas que cubre o sistema a desenvolver
+## Justification of the Identified Needs Covered by the System
 
-### 1. Problemática
+### 1. Problem Statement
 
-A problemática principal que se detecta neste proxecto é a ausencia dun control efectivo sobre os sistemas informáticos en moitas organizacións, xa sexa por falta de recursos ou por descoñecemento das solucións dispoñibles. Tendo en conta o avance constante da tecnoloxía e a forte dependencia que moitos negocios teñen actualmente dela, non se poden permitir fallos no sistema que poidan afectar á operatividade e causar perdas económicas significativas.
+The main issue identified in this project is the lack of effective control over IT systems in many organizations, either due to limited resources or a lack of awareness regarding available solutions. Considering the constant technological evolution and the strong dependence many businesses currently have on IT infrastructure, they cannot afford system failures that may affect operations and generate significant financial losses.
 
-### 2. Xustificación
+### 2. Justification
 
-A posta en marcha dun sistema de monitorización permitirá ás empresas dispoñer dunha ferramenta de supervisión continua, que lles ofrecerá en tempo real os valores de todos os sistemas monitorizados. Deste xeito, poderán detectar anomalías mesmo antes de que se convertan en problemas maiores e, no caso de que deriven nunha incidencia, contarán cun tempo de resposta suficiente para solucionala o máis rápido posible.
+Deploying a monitoring system will provide companies with a continuous supervision tool that offers real-time visibility into all monitored systems. This enables organizations to detect anomalies before they escalate into major problems. In the event that an issue does arise, they will have sufficient response time to resolve it as quickly as possible.
 
-### 3. Obxectivo xeral  
+### 3. General Objective  
 
-O obxectivo principal do proxecto é poñer en práctica todos os coñecementos adquiridos ao longo da formación para crear unha solución efectiva, que cumpra coas expectativas e que lles permita as empresas que están comezando a súa dixitalización ter un contorno o máis seguro e controlado posible.
+The primary objective of this project is to apply all the knowledge acquired throughout the training program in order to create an effective solution that meets expectations and allows companies beginning their digital transformation to operate within a secure and controlled environment.
 
-### 4. Desenvolvemento
+### 4. Development
 
-#### 4.1 Resposta á necesidade  
+#### 4.1 Response to the Identified Need  
 
-Para responder ás necesidades desta proposta, é necesario implantar un sistema que permita controlar diferentes partes da infraestrutura con datos en tempo real e de forma ininterrompida, permitindo visualizar e analizar distintos tipos de información adaptada ás necesidades de cada negocio.
+To address the needs described in this proposal, it is necessary to implement a system capable of monitoring different parts of the infrastructure using real-time, continuous data collection. The system should allow visualization and analysis of various types of information tailored to the specific requirements of each business.
 
-Adicionalmente, nos casos nos que certas anomalías ou variacións superen determinados limiares, preténdese que o sistema as notifique por diferentes vías, de maneira que o tempo entre a detección da fluctuación e a alerta ao usuario sexa mínimo. Isto permitirá unha maior organización e un tempo de resposta máis rápido ante distintas problemáticas, tanto en tarefas de prevención como de actuación.
+Additionally, when certain anomalies or variations exceed predefined thresholds, the system is designed to notify stakeholders through multiple channels, minimizing the time between anomaly detection and alert notification. This improves organizational efficiency and ensures faster response times in both preventive and corrective scenarios.
 
-#### 4.2 Medios, actividades e recursos
+#### 4.2 Means, Activities, and Resources
 
-##### Medios técnicos
+##### Technical Resources
 
-- Máquinas virtuais para simular un contorno real de traballo.
+- Virtual machines to simulate a real working environment.
+- Ubuntu Server as the base operating system for services.
+- Tools implemented: Prometheus, Grafana, Node Exporter, and Alertmanager.
 
-- Sistema operativo Ubuntu Server como base para os servizos.
+##### Human Resources  
 
-- Ferramentas a implementar: Prometheus, Grafana, Node Exporter e Alertmanager.
+- Technical profile with knowledge in networking and systems administration.
 
-    
-##### Recursos Humanos  
+##### Activities  
 
-- Perfil técnico con coñecementos en redes e sistemas.
-    
-##### Actividades  
+1. **Definition and Planning:** Design of the monitoring system architecture, defining core components, configuration parameters, and technical requirements.
 
-1. **Definición e planificación:** Deseño da arquitectura do sistema de monitorización, establecendo os compoñentes principais así como a súa configuración e os requisitos técnicos.
+2. **Implementation:** Installation and configuration of Prometheus, Grafana, Node Exporter, and Alertmanager, ensuring proper integration between components.
 
-2. **Implantación:** Instalación e configuración de Prometheus, Grafana, Node Exporter e Alertmanager asegurando que se integren correctamente entre eles.
+3. **Testing and Verification:** Execution of multiple functional tests to detect and resolve potential implementation errors.
 
-3. **Probas e verificación:** Realizar varias probas de funcionamento para comprobar e descartar posibles erros no paso de implantación.
+4. **Documentation:** Creation of a complete technical guide detailing installation and configuration steps to facilitate deployment in other companies.
 
-4. **Documentación:** Realizarase unha guía técnica completa cos pasos detallados da instalación do sistema e facilitar a implantación noutras empresas.
+5. **User Guide and Training:** Development of explanatory material to support dashboard usage and alert configuration for autonomous operation.
 
-5. **Guía de uso e formación:** Creación de material explicativo para entender o uso dos dashboards e configuración de alertas para un uso autónomo da solución.
+6. **Commercialization and Promotion:** Design of the final solution package along with promotional strategies.
 
-6. **Comercialización e difusión:** Deseño do paquete final xunto con estratexias de promoción.
+#### 4.3 Methodology  
 
-#### 4.3 Metodoloxía 
+The project follows a waterfall methodology, where each stage and corresponding steps are clearly defined.
 
-Para a realización deste proxecto optarase por unha metodoloxía en cascada, pola cal se definirán con claridade cada etapa e os pasos a seguir.
+This structured approach enables clear task segmentation and supports the development of comprehensive documentation for each phase, designed for later distribution as a technical guide.
 
-Este enfoque permitirá delimitar de maneira estruturada as tarefas a realizar e facilitará a elaboración dunha documentación que recolla o traballo feito en cada fase, pensada para a súa posterior distribución como guía técnica.
+Furthermore, it ensures system stability, as each phase depends on the successful completion of the previous one, promoting a controlled and reliable implementation process.
 
-Ademais, resultará útil para garantir a estabilidade do sistema, xa que cada fase depende da correcta realización da anterior, o que favorece unha implantación sólida e controlada da solución.
+#### 4.4 Personnel  
 
-#### 4.4 Persoal  
+All previously mentioned activities are planned to be carried out by a single individual with technical expertise. However, the solution is designed with future scalability in mind, allowing additional functionalities and broader scope expansion. Initially, it is conceived to fulfill limited functions and be entirely developed by one person.
 
-Todas as actividades citadas con anterioridade están planificadas para seren realizadas por unha soa persoa con coñecementos técnicos. Con todo, a solución está pensada para ofrecer unha gran escalabilidade no futuro, incorporando máis funcionalidades e abarcando un ámbito moito máis amplo. Nun primeiro momento, está concibida para cumprir unhas funcións máis limitadas e poder ser desenvolvida íntegramente por unha única persoa.
+#### 4.5 Timeline
 
-#### 4.5 Temporalización
+Considering the planned activities (planning, implementation, documentation, etc.) and the approximate two-month timeframe assigned—taking into account that only one person is responsible for execution—it is estimated that the project could be completed in a shorter period while still meeting expectations.
 
-Tendo en conta as actividades que se van realizar (planificación, implantación, documentación, etc.) e que o prazo dado foi de dous meses aproximadamente contando co feito de que será unha soa persoa a encargada da súa execución, pódese facer unha estimación dun tempo moi inferior ao prazo dado, co cal se pretende entregar unha solución que cumpra coas expectativas. Esta estimación cobre tanto a parte técnica como a redacción da guía, incluíndo probas e revisións. En caso de ser necesario, podería estenderse lixeiramente para melloras ou adaptacións específicas segundo as necesidades.
+This estimation includes both technical implementation and documentation writing, as well as testing and review processes. If necessary, the timeline could be slightly extended to incorporate improvements or specific adaptations based on requirements.
 
-## Posibilidades de comercialización (viabilidade, competidores…).
+## Commercialization Opportunities (Feasibility, Competitors…)
 
-### 1. Viabilidade  
+### 1. Feasibility  
 
-#### 1.1 Viabilidade Técnica
+#### 1.1 Technical Feasibility
 
-Unha gran parte do proxecto foi concibida tendo en conta a súa viabilidade técnica, escollendo ferramentas de software libre que reducen significativamente os custos e que, ademais, poden ser implantadas por unha soa persoa, polo menos na escala na que está deseñado inicialmente o sistema. O feito de empregar tecnoloxías maduras e ben documentadas, como Prometheus, Grafana, Node Exporter ou Alertmanager, facilita enormemente a súa implementación. Ademais, optouse por usar como contorno de desenvolvemento local con VirtualBox, o que permite simular un escenario virtual sen necesidade de infraestructura física e ser facilmente reproducible. Esto vai garantir unha mellor autonomía ao longo do proxecto, así como eliminar numerosas limitacións derivadas da dispoñibilidade de recursos ou servizos externos, ademais as probas e configuracións son máis directas e controladas.
+A significant part of the project was designed with technical feasibility in mind, selecting open-source tools that significantly reduce costs and can be deployed by a single individual, at least at the system’s initial scale.
 
-#### 1.2 Viabilidade Económica  
+The use of mature and well-documented technologies such as Prometheus, Grafana, Node Exporter, and Alertmanager greatly simplifies implementation. Additionally, using VirtualBox as a local development environment allows simulation of a virtual scenario without requiring physical infrastructure, making the setup easily reproducible.
 
-En canto á viabilidade económica, o proxecto está concibido inicialmente a pequena escala, polo que non require un gran investimento inicial, xa que se basea en ferramentas de software libre e nun contorno virtualizado, o que elimina os custos asociados a licenzas ou infraestrutura física.
+This approach ensures autonomy throughout the project, eliminates limitations related to external resource availability, and enables controlled and direct testing and configuration processes.
 
-No caso de querer levalo máis aló dun prototipo técnico e comercializalo de forma profesional, podería ser necesaria un investimento adicional para dispoñer dunha infraestrutura máis robusta e cubrir un ámbito máis amplo. Para estes casos, valoraríase a posibilidade de acceder a axudas públicas destinadas a proxectos de dixitalización, como as que poden ofrecer o Estado ou a Xunta de Galicia, co fin de cubrir unha parte significativa dos custos iniciais.
+#### 1.2 Economic Feasibility  
 
-### 2. Competencia  
+From an economic perspective, the project is initially conceived at a small scale, requiring minimal upfront investment since it relies on open-source tools and a virtualized environment, eliminating licensing and physical infrastructure costs.
 
-Diversas ferramentas xa consolidadas no mercado ofrecen solucións para a monitorización de sistemas, como Zabbix, Nagios ou Datadog. A pesar da súa eficacia en certos contextos, presentan limitacións importantes que este proxecto pretende resolver:
+If expanded beyond a technical prototype into a commercial product, additional investment might be required to establish a more robust infrastructure and cover a broader scope. In such cases, access to public funding programs supporting digitalization initiatives—offered by governmental institutions—could be considered to offset part of the initial costs.
 
-- Moitas destas plataformas funcionan baixo modelos de pago ou restrinxen certas funcionalidades a versións premium.
+### 2. Competition  
 
-- Requiren dunha infraestrutura máis potente para garantir un servizo estable, o que pode ser inviable para pequenas empresas.
+Several established tools already provide system monitoring solutions, such as Zabbix, Nagios, or Datadog. While effective in certain contexts, they present limitations that this project aims to address:
 
-- A súa complexidade e falta de intuitividade dificultan que usuarios sen formación específica poidan empregalas con autonomía.
+- Many operate under paid service models or restrict certain features to premium versions.
+- They require more powerful infrastructure to ensure stable service, which may be unfeasible for small businesses.
+- Their complexity and lack of intuitiveness make autonomous usage difficult for users without specialized training.
 
-A xestión avanzada das alertas é un punto central da proposta. A diferenza doutras ferramentas que concentran toda a lóxica nun único módulo, optouse por separar a detección da notificación mediante a integración de Alertmanager. Isto permite definir distintos niveis de alerta, adaptar o comportamento segundo horarios ou criticidade, e configurar múltiples canles de aviso de forma simultánea. Esta arquitectura modular ofrece unha flexibilidade e control que moitas solucións tradicionais non alcanzan, especialmente nas súas versións libres.
+Advanced alert management is a core element of this proposal. Unlike other tools that centralize logic within a single module, this system separates detection from notification through Alertmanager integration.
 
-## Ideas para a súa comercialización.
+This enables:
 
-### 1. Promoción  
+- Definition of multiple alert severity levels.
+- Custom behavior based on schedules or criticality.
+- Simultaneous configuration of multiple notification channels.
 
-A mellor forma de promoción da solución será o contacto directo con pequenas e medianas empresas, especialmente aquelas que non dispoñen dun sistema de monitorización ou non son conscientes da súa utilidade. A través das súas canles habituais, identificarase a empresas que fagan uso activo de tecnoloxía pero carezan dun control efectivo sobre os seus sistemas.
+This modular architecture provides flexibility and control that many traditional solutions—especially in their free versions—do not offer.
 
-A estas organizacións ofreceráselles a solución de forma individualizada, acompañada dunha pequena demostración técnica que permita ver como funciona o sistema e que vantaxes ofrece, especialmente en canto á detección anticipada de problemas e mellora na capacidade de resposta.
+## Commercialization Strategy
 
-Esta estratexia permite achegarse ao público obxectivo de maneira próxima e personalizada, sen depender de campañas publicitarias masivas, e adaptándose mellor ao perfil das PEMEs. Ademais, é unha opción viable a nivel económico e factible de executar por unha soa persoa, o que encaixa perfectamente co alcance inicial do proxecto.
+### 1. Promotion  
 
+The most effective promotion strategy is direct outreach to small and medium-sized enterprises, particularly those lacking monitoring systems or awareness of their importance.
 
-### 2. Modelo de negocio   
+Target organizations can be identified through their technological usage while lacking structured infrastructure control.
 
-O modelo de negocio elixido combina dúas opcións principais:
+These companies will be offered the solution individually, accompanied by a technical demonstration showcasing system functionality and highlighting key advantages, especially in early problem detection and improved response capacity.
 
-- **Modelo de pago único** pola entrega dunha guía técnica detallada, que inclúe toda a documentación necesaria para instalar, configurar e utilizar o sistema de monitorización. Esta guía permitirá que as empresas poidan implantar a solución de maneira autónoma e adaptada ao seu contorno.
+This personalized strategy allows closer engagement with the target audience without relying on large-scale advertising campaigns. It is economically viable and feasible for execution by a single individual, aligning with the project’s initial scope.
 
-- **Modelo de subscrición mensual opcional**, dirixido a aquelas empresas que desexen contar con soporte técnico adicional, adaptacións personalizadas, supervisión remota ou melloras continuas do sistema.
+### 2. Business Model  
 
-Optouse por esta combinación porque se adapta ao perfil de pequenas empresas, que poden non dispoñer de recursos para contratar servizos complexos ou permanentes, pero poden estar interesadas en contar cunha solución fiable e de baixo custo inicial. A guía permítelles acceder á ferramenta sen dependencia externa, mentres que a subscrición mensual abre a porta a un acompañamento profesional sen obrigalas a compromisos a longo prazo.
+The selected business model combines two main approaches:
 
-Este enfoque tamén permite escalar o servizo no futuro, ofrecendo máis niveis de subscrición ou incluso adaptacións personalizadas baixo demanda, segundo o crecemento do proxecto.
+- **One-time payment model** for delivering a detailed technical guide that includes all documentation required to install, configure, and operate the monitoring system. This enables companies to deploy the solution independently within their environment.
 
+- **Optional monthly subscription model** for companies that require additional technical support, customized adaptations, remote supervision, or continuous system improvements.
+
+This hybrid model is tailored to small businesses that may not have the resources to commit to complex or long-term service contracts but may still seek a reliable and cost-effective solution.
+
+The technical guide provides independence, while the optional subscription opens the door to professional support without long-term obligations.
+
+This approach also allows future scalability, enabling additional subscription tiers or customized on-demand services as the project grows.
