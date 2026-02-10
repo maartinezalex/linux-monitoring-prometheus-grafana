@@ -1,469 +1,452 @@
-# FASE DE IMPLANTACIÓN
+# IMPLEMENTATION PHASE
 
-## Posta en marcha
+## Deployment
 
-### Instalación de VirtualBox  
+### VirtualBox Installation
 
-**a) Descarga e instalación**  
+**a) Download and installation**
 
-Accédese a páxina oficial de [VirtualBox](https://www.virtualbox.org/wiki/Downloads/) e descárgase a versión correspondente ao host, en este caso usouse para Windows a versión 7.1.8 xunto co pack de extensións da mesma versión.  
+Go to the official [VirtualBox](https://www.virtualbox.org/wiki/Downloads/) website and download the version corresponding to the host system. In this case, VirtualBox 7.1.8 for Windows was used along with the Extension Pack of the same version.
 
-<img src="doc/img/descargas_vbox.png" />
+<img src="../img/descargas_vbox.png" />
 
-Unha vez descargado o instalador, procédese ca instalación por defecto.  
+Once the installer is downloaded, proceed with the default installation.
 
 ---
 
-### Máquina virtual 1: Servidor de monitorización
+### Virtual Machine 1: Monitoring Server
 
-Nesta máquina instalouse o sistema Prometheus, Grafana e Alertmanager.
+This machine hosts Prometheus, Grafana, and Alertmanager.
 
-- **Nome**: VM-Monitorización
-- **Sistema operativo convidado**: Ubuntu Server 24.04 LTS (64 bits)
-- **Memoria RAM**: 4 GB
-- **Procesadores**: 2 vCPU
-- **Disco duro**: 35 GB, formato VDI, almacenamento dinámico
-- **Adaptador de rede**: Bridge (Adaptador Ponte)
-- **Portos expostos**:  
-  - 3000 (Grafana)  
-  - 9090 (Prometheus)  
+- **Name**: VM-Monitoring
+- **Guest operating system**: Ubuntu Server 24.04 LTS (64-bit)
+- **RAM**: 4 GB
+- **Processors**: 2 vCPU
+- **Disk**: 35 GB, VDI format, dynamically allocated storage
+- **Network adapter**: Bridged Adapter
+- **Exposed ports**:
+  - 3000 (Grafana)
+  - 9090 (Prometheus)
   - 9093 (Alertmanager)
 
-> Esta máquina contén o núcleo do sistema de monitorización, accedéndose a Prometheus e Grafana dende o navegador do host ou dunha rede local.
+> This machine contains the core of the monitoring system. Prometheus and Grafana can be accessed from the host browser or from the local network.
 
-<img src="doc/img/vm_1_conf.png" />
-
----
-
-### Máquina virtual 2: Máquina monitorizada
-
-Nesta máquina instalouse unicamente **Node Exporter**.
-
-- **Nome**: VM-Monitorizada
-- **Sistema operativo convidado**: Ubuntu Desktop 24.04 LTS (64 bits)
-- **Memoria RAM**: 1 GB
-- **Procesadores**: 1 vCPU
-- **Disco duro**: 15 GB, formato VDI, almacenamento dinámico
-- **Adaptador de rede**: Bridge (Adaptador Ponte)
-
-> O Node Exporter foi configurado para escoitar no porto 9100 e ser detectado polo Prometheus da VM principal.
-
-<img src="doc/img/vm_2_conf.png" />
+<img src="../img/vm_1_conf.png" />
 
 ---
 
-### Instalación de Prometheus  
+### Virtual Machine 2: Monitored Machine
 
-**a) Descarga do binario**  
+This machine only runs **Node Exporter**.
 
-Prometheus é distribuido como binario compilado. [Descárgase](https://prometheus.io/download/) a versión oficial 2.50 desde o repositorio de GitHub (ainda que a páxina sexa a oficial de Prometheus os archivos están gardados en repositorios de GitHub), descomprímese e móvese ao directorio `/opt/prometheus` para ter os ficheiros da aplicación centralizados.  
+- **Name**: VM-Monitored
+- **Guest operating system**: Ubuntu Desktop 24.04 LTS (64-bit)
+- **RAM**: 1 GB
+- **Processors**: 1 vCPU
+- **Disk**: 15 GB, VDI format, dynamically allocated storage
+- **Network adapter**: Bridged Adapter
 
-<img src="doc/img/descarga_binarios_p.png" />
+> Node Exporter was configured to listen on port 9100 and be detected by Prometheus running on the main VM.
 
-**b) Creación do usuario e directorios** 
-
-Crear usuario sen acceso a shell nin a home evita riscos de seguridade:  
-Prometheus só executa procesos propios, sen privilexios de login. Os directorios `/etc/prometheus` (configuración) e `/var/lib/prometheus` (datos) créanse para separar configuración e datos persistentes, asignado a propiedade ao usuario Prometheus.
-
-<img src="doc/img/usuarios_directorios_p.png" />
-
-**c) Copia dos executables**  
-
-Colocar os executables en `/usr/local/bin` permite que se executen fácilmente desde calquera ruta do sistema. A propiedade limítase ao usuario Prometheus por seguridade.  
-
-<img src="doc/img/copia_executables_p.png" />
-
-**d) Copia de consolas e configuración**  
-
-Estas carpetas conteñen plantillas e recursos de consola para o panel web de Prometheus. Trasládanse a `/etc/prometheus` para centralizar.  
-
-<img src="doc/img/copia_consolas_conf.png" />
-
-**e)Copia do ficheiro de configuración principal**  
-
-O ficheiro prometheus.yml define os jobs a monitorizar (os equipos/targets), intervalos e alertas.  
-Colocándoo en `/etc/prometheus` facilítase a súa xestión centralizada e permítese realizar backups facilmente.  
-
-<img src="doc/img/copia_fich_conf_p.png" />
-
-**f) Configuración do ficheiro prometheus.yml**  
-
-Neste ficheiro defínese qué servizos e instancias van ser monitorizadas. No exemplo incúese o propio Prometheus.  
-
-<img src="doc/img/prometheus_yml.png" />
-
-**g) Creación do servizo systemd**  
-
-Crear un servizo systemd permite xestionar Prometheus como un servizo do sistema:  
-arranque automática, reinicio trás caídas, control de logs, etc.  
-O bloque "Service" define o usuario, execución do binario e rutas de configuración.  
-
-<img src="doc/img/prometheus_service.png" />
-
-
-**h) Activar o servizo**  
-
-`daemon-reload` actualiza systemd tras engadir ou modificar un servizo.  
-`enable --now` activa e inicia o servizo para que arranque ao iniciar a máquina e comece a funcionar de inmediato.  
-
-***Estructura:***  
-
-`/opt/prometheus` -> Binarios orixinais (carpeta base)  
-
-`/usr/local/bin` -> Executables para poder chamalos desde calquera punto do sistema.  
-
-`/etc/prometheus` -> Configuracións varias  
-
-`/var/lib/prometheus` -> Base de datos de Prometheus  
+<img src="../img/vm_2_conf.png" />
 
 ---
 
-### Instalación Node Exporter  
+### Prometheus Installation
 
-**a) Descarga do binario**  
+**a) Binary download**
 
-Ao igual que con Prometheus descárgase a versión oficial 1.70 desde o repositorio de GitHub, descomprímese para poder acceder ao executable.
+Prometheus is distributed as a compiled binary. The official version 2.50 was [downloaded](https://prometheus.io/download/) from the GitHub repository (the download page is the official Prometheus site, but the files are hosted in GitHub repos), extracted, and moved to `/opt/prometheus` to keep application files centralized.
 
-<img src="doc/img/node_ex_3.png" />
+<img src="../img/descarga_binarios_p.png" />
 
-**b)Instalación do binario**  
+**b) Creating the user and directories**
 
-O binario node_exporter colócase en `/usr/local/bin` para que poida executarse desde calquera parte do sistema.
+Creating a user with no shell access and no home directory reduces security risks:
+Prometheus only runs its own processes, without login privileges. The directories `/etc/prometheus` (configuration) and `/var/lib/prometheus` (data) are created to separate configuration from persistent data, assigning ownership to the Prometheus user.
 
-<img src="doc/img/node_ex_4.png" />
+<img src="../img/usuarios_directorios_p.png" />
 
+**c) Copying executables**
 
-**c)Creción do usuario** 
+Placing executables in `/usr/local/bin` allows them to be executed easily from any path. Ownership is limited to the Prometheus user for security.
 
-Crear usuario sen acceso a shell nin a home para mellorar a seguridade, e dicir, se ocorre algún problema só afectará a ese usuario e non ao sistema por completo.  
+<img src="../img/copia_executables_p.png" />
 
-<img src="doc/img/node_ex_1.png" />
+**d) Copying consoles and configuration**
 
+These folders contain templates and console resources for the Prometheus web UI. They are moved to `/etc/prometheus` for centralized management.
 
-**d) Creación do servizo systemd** 
+<img src="../img/copia_consolas_conf.png" />
 
-Configurase systemd para que se inicie ao arrancar o sistema e se poidas xestionar (arrancar/parar/reiniciar) coas ferramentas estándar de Linux así como que se execute co usuario node_exporter por razóns de seguridade.  
+**e) Copying the main configuration file**
 
-<img src="doc/img/node_ex_5.png" />
+The `prometheus.yml` file defines the jobs to monitor (targets), intervals, and alerts.
+Placing it in `/etc/prometheus` makes centralized management easier and allows backups to be created easily.
 
+<img src="../img/copia_fich_conf_p.png" />
 
----
+**f) Editing prometheus.yml**
 
-### Instalación de Grafana  
+This file defines which services and instances will be monitored. The example includes Prometheus itself.
 
-**a) Configuración de reposistorio**  
+<img src="../img/prometheus_yml.png" />
 
-Instálanse utilidades básicas para manexar repositorios seguros. Engáse a chave GPG e o repositorio oficial de [Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/).  
+**g) Creating the systemd service**
 
-**b) Instalación e activación**  
+Creating a systemd service allows Prometheus to be managed as a system service:
+automatic startup, restart after failures, log control, etc.
+The `Service` block defines the user, binary execution, and configuration paths.
 
-Actualízanse os repositorios (apt update), instálase o software (apt install). Arráncase o servizo (enable --now) e permite que se execute ao iniciar o sistema.  
+<img src="../img/prometheus_service.png" />
 
----
+**h) Enabling the service**
 
-### Instalación de Alertmanager  
+`daemon-reload` updates systemd after adding or modifying a service.
+`enable --now` enables and starts the service so it launches at boot and starts working immediately.
 
-**a) Descarga e instalación**  
+**Structure:**
 
-Proceso similar con Prometheus para garantir seguridade, separar permisos e manter estrutura.  
-
-<img src="doc/img/alert_1.png" />  
-
-<img src="doc/img/alert_2.png" />
-
-<img src="doc/img/alert_3.png" />
-
-**b) Creación systemd**  
-
-Para arranque automático, xestions do sistema (arrancar/parar/reiniciar).  
-
-<img src="doc/img/alert_4.png" />
-
-**c)Activación**  
-
-Para execución continua.  
-
-<img src="doc/img/alert_5.png" />  
-
-<img src="doc/img/alert_6.png" />
-
-**d) Configuración en Prometheus**  
-
-Permite comunicación ente Prometheus e Alertmanager para xestionar e enviar as alertas.  
+`/opt/prometheus` → Original binaries (base folder)  
+`/usr/local/bin` → Executables available system-wide  
+`/etc/prometheus` → Configuration files  
+`/var/lib/prometheus` → Prometheus database
 
 ---
 
-### Configuración de Node Exporter  
+### Node Exporter Installation
 
-**a) Engadir target**  
+**a) Binary download**
 
-No ficheiro `prometheus.yml` ao final do mesmo engades o target ca IP da que se van a extraer as métricas.  
+As with Prometheus, the official version 1.7.0 is downloaded from GitHub and extracted to access the executable.
 
-<img src="doc/img/conf_node_1.png" />  
+<img src="../img/node_ex_3.png" />
 
-**b) Comprobar os targets**  
+**b) Binary installation**
 
-Unha vez engadidos no ficheiro accedese a `prometheus/targets` desde o navegador web para verificar que está recolectando correctamente  
+The `node_exporter` binary is placed in `/usr/local/bin` so it can be executed from anywhere.
 
-<img src="doc/img/conf_node_2.png" />
+<img src="../img/node_ex_4.png" />
+
+**c) User creation**
+
+Create a user without shell access and without a home directory to improve security. In other words, if something goes wrong, it affects only that user and not the entire system.
+
+<img src="../img/node_ex_1.png" />
+
+**d) Creating the systemd service**
+
+systemd is configured so the service starts at boot and can be managed (start/stop/restart) using standard Linux tools, and so it runs as `node_exporter` for security reasons.
+
+<img src="../img/node_ex_5.png" />
 
 ---
 
-### Configuración de Grafana  
+### Grafana Installation
 
-**a) Engadir data source**  
+**a) Repository configuration**
 
-Unha vez instadas todas as ferramentas na interfaz de Grafana engádese a fonte da cal se van a enseñar as métricas.  
+Basic utilities are installed to handle secure repositories. The GPG key and the official [Grafana repository](https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/) are added.
 
-<img src="doc/img/conf_graf_1.png" />  
+**b) Installation and activation**
 
-**b) Engadir Prometheus como fonte**  
+Repositories are updated (`apt update`), the software is installed (`apt install`), and the service is started and enabled (`enable --now`) so it runs at system startup.
 
-<img src="doc/img/conf_graf_2.png" />  
+---
 
-**c) Engadir IP dos targets**  
+### Alertmanager Installation
 
-En este paso engádese a dirección IP dos targets que se queren visualizar que neste caso é VM-Monitorizada ca IP correspondente.  
+**a) Download and installation**
 
-<img src="doc/img/conf_graf_3.png" />
+A similar process to Prometheus is followed to ensure security, separate permissions, and keep a clean directory structure.
+
+<img src="../img/alert_1.png" />  
+
+<img src="../img/alert_2.png" />
+
+<img src="../img/alert_3.png" />
+
+**b) Creating the systemd service**
+
+For automatic startup and standard service management (start/stop/restart).
+
+<img src="../img/alert_4.png" />
+
+**c) Enabling the service**
+
+For continuous execution.
+
+<img src="../img/alert_5.png" />  
+
+<img src="../img/alert_6.png" />
+
+**d) Prometheus configuration**
+
+This enables communication between Prometheus and Alertmanager to manage and send alerts.
+
+---
+
+### Node Exporter Configuration
+
+**a) Adding a target**
+
+In the `prometheus.yml` file, add the target at the end with the IP address from which metrics will be scraped.
+
+<img src="../img/conf_node_1.png" />  
+
+**b) Checking targets**
+
+After adding targets, access `prometheus/targets` from the browser to verify that scraping works correctly.
+
+<img src="../img/conf_node_2.png" />
+
+---
+
+### Grafana Configuration
+
+**a) Add data source**
+
+Once all tools are installed, add the data source from which metrics will be displayed.
+
+<img src="../img/conf_graf_1.png" />  
+
+**b) Add Prometheus as the source**
+
+<img src="../img/conf_graf_2.png" />  
+
+**c) Add target IPs**
+
+In this step, add the IP address of the targets to visualize (in this case, the VM-Monitored IP).
+
+<img src="../img/conf_graf_3.png" />
 
 ---
 
 ### Dashboards
 
-Unha vez que Node Exporter está recolectando as métricas do target e Grafana ten a Prometheus como fonte e ao target asignado pódese crear un dashboard para poder visualizar toda esa información.  
+Once Node Exporter is scraping target metrics and Grafana has Prometheus configured as a data source, you can create a dashboard to visualize the information.
 
-**a) Novo dashboard** 
+**a) New dashboard**
 
-<img src="doc/img/dash_1.png" />
+<img src="../img/dash_1.png" />
 
-**b) Importar dashboard**  
+**b) Import dashboard**
 
-Nesta pestaña dache opcións para importar paneis especificos e dashboards así como crealos desde 0 personalizados. 
+This tab provides options to import specific panels/dashboards or create custom ones from scratch.
 
-<img src="doc/img/dash_2.png" />  
+<img src="../img/dash_2.png" />  
 
-**c) Engadir ID**  
+**c) Add dashboard ID**
 
-Hai infinidade de dashboards para diferentes exporters que se adaptan as necesidades de cada proxecto e todos se atopan na páxina oficial de [Grafana](https://grafana.com/grafana/dashboards/).  
-Unha vez atopes o dashboard que necesitas colles o ID e engadelo no apartado de importar dashboard.
+There are many dashboards for different exporters on the official [Grafana dashboards page](https://grafana.com/grafana/dashboards/).  
+Once you find the dashboard you need, copy its ID and paste it into the import dashboard section.
 
-**d) Vista previa**  
+**d) Preview**
 
-<img src="doc/img/dash_4.png" />
-
----
-
-### Configuración de Alertmanager
-
-**a) Engadir Alertmanager**
-
-Unha vez que Alertmanager está funcionando correctamente e comprobado con `systemctl status alertmanager` pódese engadir no ficherio de configuración `prometheus.yml` como localhost xa que está na mesma máquina que o servizo e no porto 9093 que corresponde a alertmanager.  
-
-<img src="doc/img/alert_conf_1.png" />
-
-**b) Reiniciar o servizo**  
-
-Cando se executan cambios no ficheiro de configuración débese reiniciar para que se garden os cambios.  
-
-<img src="doc/img/alert_conf_2.png" />
-
-**c) Comprobación**  
-
-A través do navegador web accedese a `/status` e hai que comprobar que alertmanager aparece como endpoint correctamente para confirmar que se aplicou ben a configuración.
-
-<img src="doc/img/alert_conf_3.png" />
+<img src="../img/dash_4.png" />
 
 ---
 
-### Crear alertas  
+### Alertmanager Configuration
 
-> Nota: Para recibir correos en gmail debe de estar activada a verificación en dous pasos do correo que recibe  
+**a) Add Alertmanager**
 
-**a) Crear contrasinal de aplicación**  
+Once Alertmanager is running correctly (verified with `systemctl status alertmanager`), it can be added in `prometheus.yml` as `localhost` (since it is on the same machine) on port 9093.
 
-Para notificar as alertas na conta de correo é necesario crear unha contrasinal de aplicación para non usar a propia. Para iso hai que iniciar sesión na [páxina de contrasinais de aplicación de Google](https://myaccount.google.com/apppasswords).
+<img src="../img/alert_conf_1.png" />
 
-<img src="doc/img/alerta1.png" />
+**b) Restart the service**
 
-<img src="doc/img/alerta2.png" />
+When configuration changes are made, the service must be restarted for changes to apply.
 
-**b) Configurar o ficheiro de alertmanager**
+<img src="../img/alert_conf_2.png" />
 
-No ficheiro `alertmanager.yml` engádese o servidor smtp de gmail así como o correo que se emprega e a clave que se xerou anteriormente. Engádese tamén `send_resolved: true` xa que desta maneira envía outro correo cando esta se resolva axudando e gran medida ao seguimento da mesma.
+**c) Verification**
 
-<img src="doc/img/alerta4.png" />
+From the browser, access `/status` and confirm Alertmanager appears as an endpoint to verify correct configuration.
 
-**c) Crear alerta**  
-
-A continuación crease un ficheiro donde se van a establecer as reglas polas cales van a saltar as alarmas, nesta caso por uso de CPU. De así querelo podese empregar o valor de vector(1) para que a alerta se envía automáticamente sen ningún criterio para comprobar que as canles funcionan correctamente.
-
-<img src="doc/img/alerta3.png" />
-
-**d) Engadilo a Prometheus**  
-
-<img src="doc/img/alerta5.png" />
-
-**e) Comprobación**
-
-Se as reglas se añadiron correctamente podense comprobar en prometheus `/rules`.
-
-<img src="doc/img/alerta6.png" />
+<img src="../img/alert_conf_3.png" />
 
 ---
 
-### Probas
+### Creating Alerts
 
-a) Alerta con vector(1)
+> Note: To receive emails in Gmail, 2-step verification must be enabled on the receiving account.
 
-Antes de probar a notificar alertas con valores de cpu está ben usar a expresión vector(1) para comprobar que os correos chegan e que ao probar cos valores da cpu asegurse funciones tamén.
+**a) Create an app password**
 
-<img src="doc/img/proba1.png" />
+To send alert emails, it is recommended to create an app password instead of using the main account password. To do so, sign in to Google’s [App Passwords page](https://myaccount.google.com/apppasswords).
 
-Ao empregar esta expresión como se dixo anteriormente é como se a regla se cumplira automaticamente, polo tanto comprobase en prometheus `/alert` se ten algunha entrada asi como no correo e na interfaz de alertmanager.
+<img src="../img/alerta1.png" />
 
-<img src="doc/img/proba2.png" />
+<img src="../img/alerta2.png" />
 
-<img src="doc/img/proba3.png" />
+**b) Configure the Alertmanager file**
 
-Tanto Alertmanager como Prometheus notificaron a alerta e chegou ao correo electrónico de destino polo tanto con esta base pode comezar a facerse probar con valores reais da CPU.
+In `alertmanager.yml`, add Gmail’s SMTP server, the account email, and the generated app password. Also add `send_resolved: true` so another email is sent when the alert is resolved, which greatly helps tracking.
 
-<img src="doc/img/proba4.png" />
+<img src="../img/alerta4.png" />
 
-b) Alert con CPU
+**c) Create the alert rule**
 
-Para verificar agora a alerta con uso de CPU o ideal é poñer uns valores baixos para comprobar que o Node Exporter está pasando correctamente os datos e segundo o tempo medio de duración da alerta sexa detectado e notificado.
+Next, create a file where the rules that trigger alerts are defined, in this case CPU usage. If desired, you can use `vector(1)` so the alert fires immediately without criteria, to verify that notification channels work.
 
-<img src="doc/img/cpu1.png" />
+<img src="../img/alerta3.png" />
 
-Como o valor que se puxo de cpu foi moi baixo salta case instantaneamente e volve a ser notificado por Prometheus Alertmanager e chega ao correo.
+**d) Add it to Prometheus**
 
-<img src="doc/img/cpu2.png" />
+<img src="../img/alerta5.png" />
 
-<img src="doc/img/cpu3.png" />
+**e) Verification**
 
-Ao pouco rato de volver a normalidade os valores da cpu mandase outro correo decindo que a alerta foi resolta.
+If the rules were added correctly, they can be checked in Prometheus at `/rules`.
 
-<img src="doc/img/cpu4.png" />
-
----
-
-## Manual técnico:
-
-### Información relativa á instalación:
-
->A continuación detallanse os elementos empregados no desenvolvemento do proxecto.
-
-#### Elementos de hardware
-
-- **Procesador**: Intel Core i7-12700K
-
-- **Placa base**: ASUS TUF GAMING Z690-PLUS WIFI D4
-
-- **Memoria RAM**: Corsair Vengeance LPX DDR4 3200MHz 32GB (2x16GB) CL16
-
-- **Tarxeta gráfica**: Nvidia GeForce RTX 3060 12GB
-
-- **Almacenamento principal**: Kingston FURY Renegade 2TB SSD NVMe PCIe 4.0 M.2 Gen4
-
-- **Almacenamento secundario**: Kioxia Exceria G2 1TB SSD NVMe M.2 2280
-
-- **Refrixeración**: Tempest Liquid Cooler 360
-
-- **Fonte de alimentación**: Corsair RMx RM1000x 1000W
+<img src="../img/alerta6.png" />
 
 ---
 
-#### Elementos de software
+### Tests
 
-- **Sistema operativo**:
-  - Ubuntu Server 24.04 LTS (versión empregada).
+**a) Alert with vector(1)**
 
-- **Software de virtualización**:
-  - **Oracle VM VirtualBox 7.1.8** 
+Before testing CPU-based alerts, it is useful to use the `vector(1)` expression to confirm that emails arrive, and then ensure CPU-based alerts work as well.
 
-- **Software principal**:
-  - **Prometheus v2.50** – Recolle e almacena métricas de sistema e servizos.
+<img src="../img/proba1.png" />
 
-  - **Node Exporter v1.7.0** – Exportador de métricas hardware e do sistema operativo.
+Using this expression means the rule is always considered true; therefore, check Prometheus at `/alert`, as well as email and the Alertmanager interface.
 
-  - **Grafana v10.4.2** – Plataforma de visualización de datos.
+<img src="../img/proba2.png" />
 
-  - **Alertmanager v0.27.0** – Servizo de xestión e envío de alertas.
+<img src="../img/proba3.png" />
 
-- **Software externo co que interactúa**:
-  - Sistemas para notificacións (correo electrónico, Slack, Telegram...), a través da configuración de Alertmanager.
+Both Alertmanager and Prometheus reported the alert and it reached the destination email account. With this baseline, testing with real CPU values can begin.
 
----
+<img src="../img/proba4.png" />
 
-#### Usuarios
+**b) CPU alert**
 
-##### Configuración inicial de seguridade  
+To verify the CPU usage alert, the ideal approach is to set low thresholds to confirm Node Exporter is exposing data correctly, and that the alert is detected and notified according to the configured `for`/evaluation time.
 
-- **Usuarios de servizo**: Creáronse contas especificas para cada servizo, sen acceso a shell nin a directorio persoal. Isto evita que se poidan usar para iniciar sesión e limita os permisos ao mínimo.  
+<img src="../img/cpu1.png" />
 
-- **Acceso á rede**: As máquinas están configuradas en modo bridge, para permitir a comunicación direct entre elas dentro da mesma rede. Só se abren os portos necesarios para cada servizo (9090, 3000, 9093, 9100).  
+Since the CPU threshold was set very low, it triggers almost immediately and is again notified by Prometheus/Alertmanager and reaches email.
 
----
+<img src="../img/cpu2.png" />
 
-##### Usuarios do sistema  
+<img src="../img/cpu3.png" />
 
-A máquina **VM-Monitorización** é a única que conta con usuario administrador principal que só está ao acceso do administrador para tarefas de mantamento. Os servizos só se executan mediante os seus respectivos usuarios restrinxidos.  
+After CPU values return to normal, another email is sent indicating the alert was resolved.
+
+<img src="../img/cpu4.png" />
 
 ---
 
-##### Usuarios da aplicación  
+## Technical Manual
 
-- **Grafana**: Configúrase o usuario admin por defecto cun contrasinal que se cambia no primeiro inicio por unha máis forte. Dentro da aplicación podense crear máis contas con permisos especificos (visualización, edición, etc...)  
+### Installation-related information:
 
-- ** Outros servizos**: Non dispoñen de xestión de usuarios na interfaz web polo tanto o contról recae na configuración de rede ou o uso de servizos externos.
+> The elements used in the development of the project are detailed below.
 
----
+#### Hardware elements
 
-#### Despregue  
-
-<img src="doc/img/DIAGRAMA_DE_FUNCIONAMENTO.png" />
-
-## Xestión de incidencias
-
-#### 1. Incidencias de sistema
-
-- **Caída de servizos**: Pode ocorrer que Prometheus, Grafana ou Alertmanager deixen de funcionar por erro de configuración ou consumo de recursos.  
-  - Detección: mediante alertas automáticas e comandos como `systemctl status` ou `journalctl`.  
-  - Solución: reiniciar o servizo afectado ou revisar os logs de erro correspondentes.
-
-- **Accesos non autorizados**: Accesos non permitidos á interfaz web de Grafana ou Alertmanager.  
-  - Prevención: uso de contrasinais seguras e xestión de usuarios con roles ben definidos.  
-  - Detección: revisión dos logs de acceso ou activación de alertas ante intentos fallidos reiterados.  
-  - Solución: restrinxir o acceso IP, modificar contrasinais ou revisar configuracións de seguridade.
-
-- **Problemas de rede ou conexión**: Fallos na comunicación entre Prometheus e os exporters.  
-  - Detección: métricas ausentes ou alertas de "target down".  
-  - Solución: verificar conectividade, revisar o ficheiro `prometheus.yml` e comprobar se o exporter está activo.
+- **Processor**: Intel Core i7-12700K
+- **Motherboard**: ASUS TUF GAMING Z690-PLUS WIFI D4
+- **RAM**: Corsair Vengeance LPX DDR4 3200MHz 32GB (2x16GB) CL16
+- **Graphics card**: Nvidia GeForce RTX 3060 12GB
+- **Primary storage**: Kingston FURY Renegade 2TB SSD NVMe PCIe 4.0 M.2 Gen4
+- **Secondary storage**: Kioxia Exceria G2 1TB SSD NVMe M.2 2280
+- **Cooling**: Tempest Liquid Cooler 360
+- **Power supply**: Corsair RMx RM1000x 1000W
 
 ---
 
-#### 2. Incidencias de software
-Relacionadas co funcionamento lóxico do sistema ou erros de configuración:
+#### Software elements
 
-- **Erro na configuración de Prometheus ou Alertmanager**:  
-  - Detección: Prometheus non arranca ou mostra erros de validación.  
-  - Solución: revisar o ficheiro `prometheus.yml` ou `alertmanager.yml` co comando `promtool check config`.
+- **Operating system**:
+  - Ubuntu Server 24.04 LTS (used version)
 
-- **Problemas coa visualización en Grafana**:  
-  - Dashboards que non cargan ou que non amosan datos actualizados.  
-  - Solución: comprobar que Prometheus está configurado correctamente como fonte de datos e que as consultas están ben definidas.
+- **Virtualization software**:
+  - **Oracle VM VirtualBox 7.1.8**
 
-- **Alertas mal configuradas**:  
-  - Alertas que non se activan ou que envían notificacións erróneas.  
-  - Solución: revisar as regras de alerta en `prometheus.yml` e comprobar que Alertmanager está funcionando e ben enlazado.
+- **Main software**:
+  - **Prometheus v2.50** – Collects and stores system and service metrics
+  - **Node Exporter v1.7.0** – Hardware and OS metrics exporter
+  - **Grafana v10.4.2** – Data visualization platform
+  - **Alertmanager v0.27.0** – Alert management and notification service
+
+- **External software/services it interacts with**:
+  - Notification systems (email, Slack, Telegram, etc.) through Alertmanager configuration
 
 ---
 
-### Procedemento xeral de xestión de incidencias
+#### Users
 
-1. **Detección da incidencia**: a través das alertas configuradas, revisión de métricas ou supervisión directa.
-2. **Análise do erro**: consultar logs de sistema (`journalctl`), revisar ficheiros de configuración, comprobar o estado dos servizos.
-3. **Resolución**: aplicar a solución correspondente segundo o tipo de incidencia.
-4. **Documentación da incidencia**: rexistro manual (ou futuro sistema automatizado) co resumo da causa, accións tomadas e resultado.
+##### Initial security configuration
 
+- **Service users**: Dedicated accounts were created for each service, without shell access or home directory. This prevents interactive login and keeps permissions to a minimum.
+
+- **Network access**: Machines are configured in bridged mode to allow direct communication between them within the same network. Only required ports are used for each service (9090, 3000, 9093, 9100).
+
+---
+
+##### System users
+
+The **VM-Monitoring** machine is the only one with a main administrator user, restricted to admin-only maintenance tasks. Services run exclusively under their respective restricted users.
+
+---
+
+##### Application users
+
+- **Grafana**: The default admin user is configured and its password is changed on first login to a stronger one. Additional accounts can be created with specific permissions (view, edit, etc.).
+
+- **Other services**: They do not provide user management in the web interface, so access control relies on network configuration and/or external services.
+
+---
+
+#### Deployment
+
+<img src="../img/DIAGRAMA_DE_FUNCIONAMENTO.png" />
+
+## Incident Management
+
+#### 1. System incidents
+
+- **Service outage**: Prometheus, Grafana, or Alertmanager may stop working due to configuration errors or resource usage.
+  - Detection: automatic alerts and commands such as `systemctl status` or `journalctl`.
+  - Solution: restart the affected service or review the corresponding error logs.
+
+- **Unauthorized access**: Unauthorized access attempts to Grafana or Alertmanager web interfaces.
+  - Prevention: strong passwords and role-based user management.
+  - Detection: review access logs or enable alerts for repeated failed attempts.
+  - Solution: restrict access by IP, change passwords, or review security configuration.
+
+- **Network/connectivity issues**: Failures in communication between Prometheus and exporters.
+  - Detection: missing metrics or "target down" alerts.
+  - Solution: verify connectivity, review `prometheus.yml`, and confirm the exporter is running.
+
+---
+
+#### 2. Software incidents
+
+Related to logical system behavior or configuration errors:
+
+- **Prometheus or Alertmanager configuration error**:
+  - Detection: Prometheus fails to start or shows validation errors.
+  - Solution: review `prometheus.yml` or `alertmanager.yml` using `promtool check config`.
+
+- **Grafana visualization issues**:
+  - Dashboards do not load or show outdated data.
+  - Solution: ensure Prometheus is correctly configured as a data source and queries are correct.
+
+- **Misconfigured alerts**:
+  - Alerts do not fire or send incorrect notifications.
+  - Solution: review alert rules and confirm Alertmanager is running and properly linked.
+
+---
+
+### General incident management procedure
+
+1. **Incident detection**: via configured alerts, metric review, or direct supervision.
+2. **Error analysis**: check system logs (`journalctl`), review configuration files, verify service status.
+3. **Resolution**: apply the corresponding fix depending on the incident type.
+4. **Incident documentation**: manual logging (or a future automated system) including root cause, actions taken, and outcome.
