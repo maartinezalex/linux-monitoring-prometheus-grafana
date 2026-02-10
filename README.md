@@ -122,6 +122,21 @@ La configuración principal se encuentra en:
 
 ---
 
+## What I Learned
+
+Through the development of this project, I gained practical experience in:
+
+- Designing and deploying a monitoring architecture based on open-source tools (Prometheus, Grafana, Alertmanager).
+- Installing services from official binaries and managing them securely using dedicated system users and systemd.
+- Structuring Linux directories correctly (`/etc`, `/var/lib`, `/usr/local/bin`) following best practices.
+- Configuring metric scraping and defining alert rules with PromQL expressions.
+- Implementing automated alert notifications via SMTP and validating alert workflows (test alerts using `vector(1)` and real CPU thresholds).
+- Troubleshooting service failures using `systemctl`, `journalctl`, and configuration validation tools.
+- Managing virtualized infrastructure with VirtualBox in a multi-VM environment.
+- Understanding the importance of monitoring as a proactive security and reliability strategy.
+  
+---
+
 ## Índice de la documentación del proyecto
 
 1. Anteproyecto  
