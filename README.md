@@ -65,7 +65,7 @@ You can contact me via email or through my LinkedIn profile.
 
 ## License
 
-This project is licensed under the [GNU Free Documentation License Version 1.3](https://gitlab.com/iesleliadoura/asir2/alejandro-martinez/-/blob/main/doc/LICENSE.txt).
+This project is licensed under the [GNU Free Documentation License Version 1.3](/doc/LICENSE.txt).
 
 For more details, please refer to the full license text.
 
