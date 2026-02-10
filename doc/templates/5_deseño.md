@@ -1,83 +1,75 @@
-# FASE DE DESEÑO
+# DESIGN PHASE
 
-## Arquitectura
+## Architecture
 
-Modelo da arquitectura do teu sistema
-Compoñentes que participan no sistema completo.
+System architecture model  
+Components participating in the complete system.
 
-O sistema de monitorización está estruturado cun enfoque distribuído no que os servizos centralizados nunha máquina virtual, mentres que os sistemas a monitorizar funciona como nodos remotos que expoñen as súas métricas.  
+The monitoring system is structured using a distributed approach in which services are centralized on a main virtual machine, while monitored systems operate as remote nodes exposing their metrics.
 
-A máquina virtual principal emprega un sistema operativo Ubuntu Server escollido pola súa lixeireza e compatibilidade coas ferramentas utilizadas. Os nodos monitorizados pola súa banda, poden empregar a versión de escritorio, como Ubuntu Desktop, que permite visualizar métricas máis variadas ao contar con procesos en segundo plano.  
+The main virtual machine runs Ubuntu Server, selected for its lightweight nature and compatibility with the tools used. The monitored nodes, on the other hand, may use a desktop version such as Ubuntu Desktop, which allows more varied metric visualization due to background processes.
 
-Como a máquina virtual principal implementaronse os seguintes compoñentes:  
+The following components are deployed on the main virtual machine:
 
-- Prometheus, encargado da recolección e almacenamento de métricas.
+- Prometheus, responsible for metrics collection and storage.
+- Grafana, used for data visualization and graphical analysis.
+- Alertmanager, responsible for sending alerts when critical values are detected.
+- Required configuration files to integrate all services.
 
-- Grafana, para a visualización e análise gráfica dos datos.
+The network architecture is designed to facilitate web browser access to the main services. In the context of a local deployment using VirtualBox, specific port forwarding is not required. However, in a future cloud deployment, it would be necessary to ensure access to the following ports (which are also used locally):
 
-- Alertmanager, que xestiona o envío de alertas cando se detectan valores críticos.
+- Port 22: SSH access to the virtual machine for administration tasks.
+- Port 3000: Access to the Grafana web interface.
+- Port 9090: Access to the Prometheus interface.
+- Port 9093: Access to the Alertmanager panel.
+- Port 9100: Node Exporter metrics exposure (this port should only be accessible from the main VM’s IP address).
 
-- Os ficheiros de configuración necesarios para integrar todos os servizos.
+Node Exporter is installed on each monitored node to expose system metrics, which Prometheus then collects and processes.
 
-A arquitectura da rede empregada vai a fácilitar o acceso vía navegador web aos principais servizos. No contexto dunha implantación local mediante VirtualBox, non se vai a realizar a apertura de portos específicos. Con todo, nunha futura implementación en contornos cloud, sería necesario garantir o acceso a estos portos, que tamén se utilizan en local:
+Access to services is performed via web browser within the local network by entering the IP address of the main machine and the corresponding service port.
 
-- Porto 22: acceso SSH á máquina virtual para tarefas de administración.
+## Use Cases
 
-- Porto 3000: acceso á interface web de Grafana.
+Users, roles, or actors participating in the system:
 
-- Porto 9090: acceso á interface de Prometheus.
+- Administrator user (me): Full access to the system. Can create and modify dashboards, manage users, and edit Grafana’s global configuration. This role is reserved for the solution integrator.
 
-- Porto 9093: acceso ao panel de Alertmanager.
+- Editor user (technician): Can create, modify, and delete dashboards, but cannot change the system’s global configuration or manage users. Intended for the company’s technical staff.
 
-- Porto 9100: exposición de métricas do Node Exporter (este porto só debe ser accesible pola IP da VM)
+- Viewer user: Can only view dashboards predefined by the administrator or editor. Intended for use by different company departments depending on their needs.
 
-Node Exporter por outro lado instalase en cada un dos nodos monitorizados para expoñer as súas métricas e que Prometheus as recolla e interprete.
-O acceso será por vía navegador web da rede local ingresando a ip da máquina principal e o porto correspondente do servizo.
+## User Interfaces
 
-## Casos de uso 
+If there is any type of user interface, whether GUI or CLI.
 
-Usuarios, roles ou tipo de actores que participan no sistema
+The system provides graphical web interfaces accessible via a web browser, used for configuration, visualization, and service supervision.
 
-- Usuario administrador (eu): Este usuario terá acceso completo ao sistema, pode crear e modificar dashboards, xestionar usuarios editar a configuración global de Grafana. Este rol vai estar reservado ao integrador da solución.  
+**Prometheus Interface:**
 
-- Usuario editor (técnico): Pode crear, modificar e eliminar dashboards, pero non pode cambiar a configuración global do sistema nin xestionar usuarios. Está pensado para ser usado polo persoal técnico da empresa.  
+<img src="../img/interfaz_prometheus.png">  
 
-- Usuario visualizador: Só pode consultar os dashboards predefinidos polo administrador ou o editor. Este perfil está pensado para ser usado polos diferentes departamentos da empresa según o uso que se lle queira dar.
+**Grafana Login:**
 
+<img src="../img/login_grafana.png">
 
-## Interfaces de Usuario
+**Grafana Interface:** 
 
-Se tes algún tipo de interfaz de usuario, sexa de tipo GUI ou tipo CLI
+<img src="../img/interfaz_grafana.png">
 
-O sistema conta con interfaces gráficas accesible mediante navegador web, empregadas para a configuración, visualización e supervisión dos servizo.  
+**Alertmanager Interface:**
 
-**Interfaz de Prometheus:**
+<img src="../img/alert_6.png">
 
-<img src="doc/img/interfaz_prometheus.png">  
+## Deployment Diagram
 
-**Login Grafana:**
+<img src="../img/DIAGRAMA_DE_FUNCIONAMENTO.png">
 
-<img src="doc/img/login_grafana.png">
+## Configuration Files
 
-**Interfaz de Grafana:** 
+- [**Prometheus.yml**](../../src/prometheus.yml)
 
-<img src="doc/img/interfaz_grafana.png">
+- [**Grafana.ini**](../../src/grafana.ini)
 
-**Interfaz de Alertmanager:**
+- [**Alertmanager.yml**](../../src/alertmanager.yml)
 
-<img src="doc/img/alert_6.png">
-
-## Diagrama de despregamento
-<img src="doc/img/DIAGRAMA_DE_FUNCIONAMENTO.png">
-
-## Ficheiros de Configuración 
-
-- [**Prometheus.yml**](/src/prometheus.yml)
-
-- [**Grafana.ini**](/src/grafana.ini)
-
-- [**Alertmanager.yml**](/src/alertmanager.yml)
-
-- [**Alert_rules.yml**](/src/alert_rules.yml)
-
-
+- [**Alert_rules.yml**](../../src/alert_rules.yml)
