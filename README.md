@@ -1,64 +1,149 @@
-# Proxecto fin de ciclo
+# Monitoring System Project
 
-<img src="doc/img/portada.png"
-style="width:17cm;height:12.014cm" />
+![Project Cover](doc/img/portada.png)
 
+## Monitoring System
+
+This project consists of deploying a monitoring system designed for small and medium-sized businesses that are taking their first steps in digital transformation and do not yet have tools to control the status of their infrastructure.
+
+The goal is to use open-source software such as Prometheus and Grafana to collect and visualize real-time metrics (CPU, memory, disk). All metrics can be accessed through a web browser in graphical format, and alerts can be configured to notify administrators when specific thresholds are exceeded.
+
+In addition to the practical implementation, this project includes a complete technical guide covering the full installation and configuration process. It is designed so that a person with basic technical knowledge can replicate the system with minimal effort. The entire setup runs on virtual machines, avoiding the need for additional hardware.
+
+The objective is to provide a useful, simple, and scalable solution that helps detect technical issues before they impact business operations.
+
+---
+
+## Installation / Deployment
+
+The installation of this system consists of three main stages:
+
+1. Preparing the virtual environment (VirtualBox).
+2. Creating the virtual machines.
+3. Installing and configuring the tools on:
+   - Machine 1 (Monitoring Server)
+   - Machine 2 (Monitored Target)
+
+After installation and configuration, testing can begin. Alerts and dashboards can be created and customized to adapt the system to specific needs.
+
+For a detailed step-by-step installation guide, see the [Deployment section](doc/templates/6_implantacion.md) included in this repository.
+
+---
+
+## Usage
+
+Once configured, services can be accessed through the IP address of the server machine. Each service uses a specific port:
+
+- Grafana: port 3000  
+- Alertmanager: port 9093  
+- Prometheus: port 9090  
+
+Grafana is the primary interface used daily. From there, dashboards can be visualized, filters applied, and new panels created.
+
+If a predefined threshold is exceeded (for example, high CPU usage), alerts are sent to the configured communication channels (email, Telegram, etc.), depending on severity and configuration.
+
+Most alert rules are defined in:
+
+- [prometheus.yml](src/prometheus.yml)  
+- [alertmanager.yml](src/alertmanager.yml)
+
+Alertmanager’s web interface (port 9093) can also be used to visualize alert states.
+
+---
+
+## About the Author
+
+My name is Alejandro Martínez and I am currently studying ASIR (Network Systems Administration). Since childhood, I have been interested in computers and technology, which motivated me to pursue a career in this field.
+
+I am particularly interested in networking and cybersecurity, although I remain open to exploring new areas and continuously improving my technical skills.
+
+With this project, I aimed to deepen my understanding of system monitoring, as I consider it a key component in maintaining infrastructure security and reliability. It also allowed me to apply the knowledge acquired throughout my studies and understand how system resources can be optimized and controlled.
+
+You can contact me via email or through my LinkedIn profile.
+
+---
+
+## License
+
+This project is licensed under the [GNU Free Documentation License Version 1.3](https://gitlab.com/iesleliadoura/asir2/alejandro-martinez/-/blob/main/doc/LICENSE.txt).
+
+For more details, please refer to the full license text.
+
+---
+
+# Sistema de Monitorización (Versión en Español)
+
+![Portada del Proyecto](doc/img/portada.png)
 
 ## Sistema de monitorización
 
-O proxecto consiste en montar un sistema de monitorización pensado para pequenas e medianas empresas que están dando os seus primeiros pasos na dixitalización e non dispoñen das ferramentas para controlar o estado dos seus equipos.  
+El proyecto consiste en montar un sistema de monitorización pensado para pequeñas y medianas empresas que están dando sus primeros pasos en la digitalización y no disponen de herramientas para controlar el estado de sus equipos.
 
-A idea é usar software libre, como Prometheus e Grafana, para recoller e visualizar métricas en tempo real (CPU, memoria, disco). Todo isto pódese ver dende o navegador en forma de gráficos, tamén se poden configurar alertas para notificar se algún valor supera os límites establecidos.  
+La idea es utilizar software libre, como Prometheus y Grafana, para recoger y visualizar métricas en tiempo real (CPU, memoria, disco). Todo puede consultarse desde el navegador en forma de gráficos y es posible configurar alertas para notificar si algún valor supera los límites establecidos.
 
-Ademais da parte práctica, inclúese unha guía técnica co proceso completo  de instalación e configuración, pensada para que unha persoa con coñecementos básicos sexa capaz de replicalo con pouco esforzo. Todo funciona sobre máquinas virtuais o cal é un plus evitando así hardware extra.  
+Además de la parte práctica, se incluye una guía técnica con el proceso completo de instalación y configuración, pensada para que una persona con conocimientos básicos pueda replicarlo con poco esfuerzo. Todo funciona sobre máquinas virtuales, evitando la necesidad de hardware adicional.
 
-A fin é ofrecer unha solución útil, sixela e que axude a detectar problemas técnicos antes de que afecten á actividade da empresa.
+El objetivo es ofrecer una solución útil, sencilla y que ayude a detectar problemas técnicos antes de que afecten a la actividad de la empresa.
+
+---
 
 ## Instalación / Puesta en marcha
 
-A instalación deste sistema consta de 3 partes. Primeiro hai que preparar o entorno virtual que neste caso é VirtualBox, sobre o cal van a traballar as máquinas e os servizos. Unha vez a base está sentada hai que crear as máquinas virtuais e instalar/configurar as ferramentas na máquina número 1 e na máquina número 2. Con todo xa instalado e configurado podense comezar a facer probas e crear alertas ou dashboards para personalizalo e deixalo da forma que máis se adapte as necesidades.  
-Para ver de forma máis detallada a instalación paso por paso pódese consultar a parte de [implantación](/doc/templates/6_implantacion.md) que consta neste mesmo proxecto.
+La instalación del sistema consta de tres partes:
+
+1. Preparación del entorno virtual (VirtualBox).
+2. Creación de las máquinas virtuales.
+3. Instalación y configuración de herramientas en:
+   - Máquina 1 (Servidor de monitorización)
+   - Máquina 2 (Sistema monitorizado)
+
+Una vez instalado y configurado todo, se pueden realizar pruebas y crear alertas o dashboards personalizados.
+
+Para ver el proceso detallado paso a paso, consulte la sección de [Implantación](doc/templates/6_implantacion.md) incluida en este proyecto.
+
+---
 
 ## Uso
 
-Unha vez que todo esté configurado imos acceder aos servizos a través da dirección IP neste caso do servidor a cal será a mesma para todos a excepción dos portos que empregamos para cada unha para acceder desde o navegador.  
+Una vez configurado, se accede a los servicios a través de la dirección IP del servidor. Cada servicio utiliza un puerto específico:
 
-A maior parte das veces accedese a interfaz de Grafana (porto 3000) e unha vez dentro poderemos visualizar/crear dashboards, aplicar filtros e crear novos paneis.  
+- Grafana: puerto 3000  
+- Alertmanager: puerto 9093  
+- Prometheus: puerto 9090  
 
-Se en algun momento se supera certo umbral establecido polo técnico ou o administrador, a alerta chega as canles configuradas para a sua notificación (correo, telegram...) en función da hora ou o crítico que sexa. Estas configuracións tamén se poden ver a través da propia interfaz de Alertmanager no porto 9093 ainda que a maior parte da configuración recae nos ficheiro [prometheus.yml](/src/prometheus.yml) e [alertmanager.yml](/src/alertmanager.yml).
+La interfaz principal es Grafana, donde se pueden visualizar dashboards, aplicar filtros y crear nuevos paneles.
 
-## Sobre o autor
+Si se supera un umbral definido por el administrador (por ejemplo, alto consumo de CPU), la alerta se envía a los canales configurados (correo, Telegram, etc.).
 
-Chámome Alejandro Martínez e son estudante de ASIR. Desde pequeno sempre me gustou trastear cos ordenadores e isto foi o que me motivou a dedicarme nesta área e continuar os meus estudos. Estou especialmente interesado polas ramas de redes e ciberseguridade, aínda que me manteño aberto a novas áreas e sempre intento aprender e actualizar os meus coñecementos día a día.
+La configuración principal se encuentra en:
 
-Con este proxecto pretendia afondar na monitorización de sistemas porque o considero unha parte clave para manter a seguridad no entorno e infraestructura tecnoloxica. Sirveme ademais como practica para aplicar moitas das cousas que aprendin ao longo deste curso e a entender como se poden optimizar e controlar os recursos dun sistema.
+- [prometheus.yml](src/prometheus.yml)  
+- [alertmanager.yml](src/alertmanager.yml)
 
-Pódese contactar comigo por correo electrónico en ou a través do meu perfil en LinkedIn.
-
-## Licencia
-
-Este proxecto está licenciado baixo a [GNU Free Documentation License Version 1.3](https://gitlab.com/iesleliadoura/asir2/alejandro-martinez/-/blob/main/doc/LICENSE.txt).  
-Para mais detalles, ver o texto completo a continuación.
-
+---
 
 ## Índice de la documentación del proyecto
 
-1. Anteproyecto
-    * 1.1. [Idea](doc/templates/1_idea.md)
-    * 1.2. [Necesidades](doc/templates/2_necesidades.md)
-2. [Análisis](doc/templates/3_analise.md)
-3. [Planificación](doc/templates/4_planificacion.md)
-4. [Diseño](doc/templates/5_deseño.md)
+1. Anteproyecto  
+    * 1.1. [Idea](doc/templates/1_idea.md)  
+    * 1.2. [Necesidades](doc/templates/2_necesidades.md)  
+2. [Análisis](doc/templates/3_analise.md)  
+3. [Planificación](doc/templates/4_planificacion.md)  
+4. [Diseño](doc/templates/5_deseño.md)  
 5. [Implantación](doc/templates/6_implantacion.md)
 
-## Links
+---
 
-- Oracle. (2024, 27 de setembro). *Downloads – Oracle VirtualBox*. [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
+## Referencias
 
-- Bujarra. (s.f.). *Blog Bujarra: Documentación sobre recolección de métricas*. [https://www.bujarra.com](https://www.bujarra.com)
+- Oracle. (2024). *Downloads – Oracle VirtualBox*.  
+  https://www.virtualbox.org/wiki/Downloads  
 
-- Grafana Labs. (s.f.). *Grafana*. [https://grafana.com](https://grafana.com)
+- Bujarra. *Documentación sobre recolección de métricas*.  
+  https://www.bujarra.com  
 
-- Prometheus Authors. (s.f.). *Prometheus: Monitoring system & time series database*. [https://prometheus.io](https://prometheus.io)
+- Grafana Labs. *Grafana*.  
+  https://grafana.com  
 
-
+- Prometheus Authors. *Prometheus: Monitoring system & time series database*.  
+  https://prometheus.io  
