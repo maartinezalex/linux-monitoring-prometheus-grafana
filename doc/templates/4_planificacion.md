@@ -1,144 +1,135 @@
-# FASE DE PLANIFICACIÓN DO PROXECTO
+# PROJECT PLANNING PHASE
 
-## Obxectivos do proxecto
+## Project Objectives
 
-## Guía de planificación do proxecto
+## Project Planning Guide
 
-### Metodoloxía
+### Methodology
 
-A metodoloxía que se vai empregar para desenvolver o proxecto será en cascada, esto vainos permitir definir con claridade que esperamos conseguir en cada etapa e non avanzar á seguinte ata que a fase se resolva de maneira satisfactoria. Isto garantirá unha base bastante sólida en cada paso que se dea e, no caso de que xurda algún erro, ao estar ben estructurado será máis doado localizar a orixe do problema e corrixilo.
+The methodology selected for the development of this project is the waterfall model. This approach allows each stage to be clearly defined and ensures that the next phase does not begin until the current one has been completed satisfactorily.  
 
-### Fases planificadas
+This guarantees a solid foundation at every step, and if any issue arises, the structured approach makes it easier to identify the root cause and correct it efficiently.
 
-#### Fase 1: Idea
+### Planned Phases
 
-Descrición: Nesta fase analízanse o problema de partida, identifícase as necesidades e estudase a competencia. En base a todo isto, defínese a idea do proxecto e a quen o queremos dirixir, planifícase un modelo de negocio inicial e escollense as ferramentas que se van a usar.
+#### Phase 1: Idea
 
-Recursos hardware/software: Editor de texto, navegador, acceso a internet.
+Description: In this phase, the initial problem is analyzed, needs are identified, and competitors are studied. Based on this analysis, the project idea is defined, the target audience is determined, an initial business model is planned, and the tools to be used are selected.
 
-Recursos humanos: 1 persoa con perfil técnico
+Hardware/Software Resources: Text editor, web browser, internet access.  
+Human Resources: 1 person with a technical profile.  
+Duration: 7 days.
 
-Duración: 7 días 
+---
 
+#### Phase 2: Needs
 
-#### Fase 2: Necesidades
+Description: In this phase, the identified problems are analyzed. The needs to be addressed are defined, and the current context of SMEs is studied. A clear objective is established, along with the means, activities, and resources required to achieve it. Technical and economic feasibility are evaluated, and the solution is compared with competitors to assess strengths and weaknesses.
 
-Descrición: Nesta fase analízanse os problemas detectados. Delimítanse as necesidades ás que se quere dar resposta e tamén se estuda o contexto actual das PEMES. Márcase un obxectivo e propoñense os medios para conseguilo asi como as actividades e os recursos a empregar. Estúdase a viabilidade técnica e económica da solución e compárase coa competencia para valorar pros e contras.
+Hardware/Software Resources: Same as Phase 1.  
+Human Resources: 1 person.  
+Duration: 7 days.
 
-Recursos hardware/software: Editor de texto, navegador, acceso a internet.
+---
 
-Recursos humanos: 1 persoa
+#### Phase 3: Analysis
 
-Duración: 7 días
+Description: In this phase, the system’s technical components are defined, selected tools and their interactions are specified. Core functionalities, user types, non-functional requirements, and the solution architecture are established. Potential future improvements are also considered.
 
-#### Fase 3: Análise
+Hardware/Software Resources: Same as Phase 2.  
+Human Resources: 1 person.  
+Duration: 7 days.
 
-Descrición: Nesta fase defínense os compoñentes técnicos do sistema, especifícanse as ferramentas seleccionadas e a súa interacción. Establécense as funcionalidades principais, os tipos de usuario, os requisitos non funcionais e a arquitectura da solución. Tamén se poñen en consideración posibles melloras futuras.
+---
 
-Recursos hardware/software: Mesmas que na fase 2
+#### Phase 4: Planning
 
-Recursos humanos: 1 persoa
+Description: In this phase, the entire project is structured and organized. Work phases, estimated timelines, resources, and task distribution are defined. A Gantt chart is created for project activities, and an estimated budget is calculated to ensure controlled and realistic development.
 
-Duración: 7 días
+Hardware/Software Resources: Text editor, Canva, GanttProject, web browser.  
+Human Resources: 1 person.  
+Duration: 7 days.
 
-#### Fase 4: Planificación
+---
 
-Descrición: Nesta fase estructúrase e organízase todo o proxecto, establécense as fases de traballo, prazos estimados, recursos e a distribución de tarefas. Defínese un diagrama de Gantt cas actividades do proxecto e calcúlase un orzamento estimado para garantir un desenvolvemento controlado e realista.
+#### Phase 5: Design
 
-Recursos hardware/software: Editor de texto, canva, ganttproject, navegador web.
+Description: In this phase, the solution architecture is defined. A main machine integrating services is established, the technical system design is completed, and user interfaces are presented.
 
-Recursos humanos: 1 persoa
+Hardware/Software Resources: Text editor, VirtualBox, Ubuntu Server, Prometheus, Grafana.  
+Human Resources: 1 person.  
+Duration: 7 days.
 
-Duración: 7 días.
+---
 
-#### Fase 5: Deseño
+#### Phase 6: Implementation
 
-Descrición: Nesta fase defínese a arquitectura da solución, establécese unha máquina principal que integra os servizos, completase o deseño técnico do sistema e mostranse as interfaces dos usuarios.
+Description: In this phase, the project plan is put into practice. Virtualization software (VirtualBox) is installed and two machines are created: one centralizes services (Prometheus, Grafana, Alertmanager), while the other acts as the monitored node (Node Exporter). Services are installed, users are created, permissions are adjusted, and configuration between components is completed. Once the system is deployed, testing and verification are performed to identify and resolve potential errors.
 
-Recursos hardware/software: Editor de texto, VirtualBox, Ubuntu Server, Prometheus, Grafana.
+Hardware/Software Resources: VirtualBox, Ubuntu Server, Ubuntu Desktop, Prometheus, Grafana, Node Exporter, web browser.  
+Human Resources: 1 person.  
+Duration: 7 days.
 
-Recursos humanos: 1 persoa
+---
 
-Duración: 7 días.
+#### Phase 7: Presentation
 
-#### Fase 6: Implantación
+Description: In this final phase, documentation is completed and the oral presentation is prepared. Visual support material is created to assist both the presenter and the audience in understanding the solution. This phase also includes final verification to ensure the solution is ready for testing and demonstration.
 
-Descrición: Nesta fase lévase a práctica o plantexado no proxecto. Instálase o software de virtualización (VirtualBox) e creanse dúas máquinas, unha centraliza os servizos (Prometheus, Grafana, Alertmanager...) mentres que a outra servirá para ser monitorizada (Node Exporter). Instálanse os servizos, créanse usuarios, axústanse permisos e realizase a configuración entre os diferentes compoñentes. Unha vez implantado o sistema realizanse probas e verificación para descartar posibles erros. 
+Hardware/Software Resources: Text editor, Canva, PowerPoint, VirtualBox.  
+Human Resources: 1 person.  
+Duration: 15 days.
 
-Recursos hardware/software: VirtualBox, Ubuntu Server, Ubuntu Desktio, Prometheus, Grafana, Node Exporter, navegador web.
+---
 
-Recursos humanos: 1 persoa
+### Gantt Chart
 
-Duración: 7 días.  
+<img src="../img/diagrama_gantt.png">
 
-#### Fase 7: Presentación
+## Budget
 
-Descrición: Nesta fase finalizase a documentación e preparase a exposición oral. Para eso elabórase un apoio visual que sexa de útilidade tanto para que o expón como para que sexa máis doado de entender para os demais. Tamén se emprega o tempo dedicado nesta fase a comprobar e verificar que a solución está lista para facer probas e demostracións.
+This project was designed to be carried out without incurring direct economic costs. All components used are open-source and free software, eliminating expenses related to licenses or specialized tools. Additionally, the base infrastructure was implemented in a VirtualBox virtual machine, avoiding costs associated with server rentals or hardware acquisition.
 
-Recursos hardware/software: Editor de texto, Canva, Powerpoint, VirtualBox
+Regarding hardware, the project uses my personal workstation, which is fully equipped to perform the expected tasks. The specifications are listed below:
 
-Recursos humanos: 1 persoa
-
-Duración: 15 días.
-
-### Diagrama de Gantt
-
-<img src="doc/img/diagrama_gantt.png">
-
-## Orzamento
-
-Este proxecto foi deseñado para levarse a cabo sen incorrer en custos económicos directos. Todos os compoñentes utilizados son de software libre e gratuíto, o que elimina o gasto asociado a licenzas ou adquisición de ferramentas específicas. Ademais, a infraestrutura base foi implementada nunha máquina virtual en VirtualBox, o que permite evitar tamén o custo derivado do alugueiro de servidores ou compra de hardware.  
-
-En canto a parte de hardware para este proxecto estou usando o meu equipo persoal que está completamente equipado para realizar as tarefas que se esperan desta actividade. A continuación comentanse as especificacións do equipo:  
-
-- **Procesador**: Intel Core i7-12700K
-
-- **Placa base**: ASUS TUF GAMING Z690-PLUS WIFI D4
-
-- **Memoria RAM**: Corsair Vengeance LPX DDR4 3200MHz 32GB (2x16GB) CL16
-
-- **Tarxeta gráfica**: Nvidia GeForce RTX 3060 12GB
-
-- **Almacenamento principal**: Kingston FURY Renegade 2TB SSD NVMe PCIe 4.0 M.2 Gen4
-
-- **Almacenamento secundario**: Kioxia Exceria G2 1TB SSD NVMe M.2 2280
-
-- **Refrixeración**: Tempest Liquid Cooler 360
-
-- **Fonte de alimentación**: Corsair RMx RM1000x 1000W
-
-### Orzamento por partidas de inversión / gasto:
-
-| Compoñente             | Modelo / Especificación                                                  | Prezo aproximado (€) |
-|------------------------|---------------------------------------------------------------------------|----------------------|
-| **Procesador**         | Intel Core i7-12700K – 12 núcleos / 20 fíos                               | 350 €               |
-| **Placa base**         | ASUS TUF GAMING Z690-PLUS WIFI D4                                         | 220 €               |
-| **Refrigeración**      | Tempest Liquid Cooler 360 – Refrixeración líquida AIO                     | 90 €                |
-| **Memoria RAM**        | Corsair Vengeance LPX DDR4 3200MHz 32GB (2x16GB) CL16                     | 90 €                |
-| **Disco SSD (principal)**  | Kingston FURY Renegade 2TB NVMe PCIe 4.0 M.2 Gen4                    | 200 €               |
-| **Disco SSD (secundario)**| Kioxia Exceria G2 1TB NVMe M.2 2280                                    | 70 €                |
-| **Fonte de alimentación** | Corsair RMx RM1000x 1000W 80 Plus Gold Modular                         | 160 €               |
-| **TOTAL**              |                                                                           | **1.180 €**         |
-
-### Man de obra
-
-A pesar de que este proxecto non supón custes directos en software ou infraestrutura, cómpre facer unha estimación do tempo invertido nas distintas fases, xa que este constitúe o principal recurso consumido. A continuación detállase a repartición das horas de traballo segundo as fases do proxecto, tomando como referencia unha dedicación diaria de 8 horas entre o 28 de abril e o 15 de xuño (excluíndo fins de semana), cun total estimado de 250 horas. A tarifa de man de obra considerouse de 10 € por hora.
-
-| Fase                               | Horas estimadas | Custo (€) |
-|------------------------------------|------------------|-----------|
-| 1. Idea inicial e motivación       | 10 h             | 100 €     |
-| 2. Recompilación de necesidades    | 15 h             | 150 €     |
-| 3. Análise do sistema              | 25 h             | 250 €     |
-| 4. Planificación                   | 20 h             | 200 €     |
-| 5. Deseño da solución              | 30 h             | 300 €     |
-| 6. Implantación técnica            | 70 h             | 700 €     |
-| 7. Probas e validación             | 30 h             | 300 €     |
-| 9. Documentación técnica e final   | 50 h             | 500 €     |
-| **TOTAL**                          | **250 h**        | **2.500 €** |
-
-| **COSTE TOTAL**              |                                                                           | **3.680 €**         |
-
-
-
-
-
+- **Processor**: Intel Core i7-12700K  
+- **Motherboard**: ASUS TUF GAMING Z690-PLUS WIFI D4  
+- **RAM**: Corsair Vengeance LPX DDR4 3200MHz 32GB (2x16GB) CL16  
+- **Graphics card**: Nvidia GeForce RTX 3060 12GB  
+- **Primary storage**: Kingston FURY Renegade 2TB SSD NVMe PCIe 4.0 M.2 Gen4  
+- **Secondary storage**: Kioxia Exceria G2 1TB SSD NVMe M.2 2280  
+- **Cooling**: Tempest Liquid Cooler 360  
+- **Power supply**: Corsair RMx RM1000x 1000W  
+
+### Investment / Expense Breakdown:
+
+| Component               | Model / Specification                                          | Approximate Price (€) |
+|------------------------|----------------------------------------------------------------|-----------------------|
+| **Processor**         | Intel Core i7-12700K – 12 cores / 20 threads                   | 350 €                 |
+| **Motherboard**       | ASUS TUF GAMING Z690-PLUS WIFI D4                              | 220 €                 |
+| **Cooling**           | Tempest Liquid Cooler 360 – AIO liquid cooling                 | 90 €                  |
+| **RAM**               | Corsair Vengeance LPX DDR4 3200MHz 32GB (2x16GB) CL16         | 90 €                  |
+| **Primary SSD**       | Kingston FURY Renegade 2TB NVMe PCIe 4.0 M.2 Gen4              | 200 €                 |
+| **Secondary SSD**     | Kioxia Exceria G2 1TB NVMe M.2 2280                             | 70 €                  |
+| **Power Supply**      | Corsair RMx RM1000x 1000W 80 Plus Gold Modular                 | 160 €                 |
+| **TOTAL**             |                                                                | **1,180 €**           |
+
+### Labor Cost
+
+Although this project does not involve direct costs in software or infrastructure, it is important to estimate the time invested in each phase, as this represents the primary consumed resource.  
+
+The following table details the estimated work hours per phase, assuming a daily dedication of 8 hours between April 28 and June 15 (excluding weekends), with an estimated total of 250 hours. Labor cost is calculated at €10 per hour.
+
+| Phase                                | Estimated Hours | Cost (€) |
+|--------------------------------------|-----------------|----------|
+| 1. Initial Idea and Motivation       | 10 h            | 100 €    |
+| 2. Needs Gathering                   | 15 h            | 150 €    |
+| 3. System Analysis                   | 25 h            | 250 €    |
+| 4. Planning                          | 20 h            | 200 €    |
+| 5. Solution Design                   | 30 h            | 300 €    |
+| 6. Technical Implementation          | 70 h            | 700 €    |
+| 7. Testing and Validation            | 30 h            | 300 €    |
+| 9. Technical and Final Documentation | 50 h            | 500 €    |
+| **TOTAL**                            | **250 h**       | **2,500 €** |
+
+| **TOTAL PROJECT COST** | | **3,680 €** |
